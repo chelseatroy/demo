@@ -3,6 +3,7 @@ package com.example;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -11,8 +12,12 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class DefaultUsersServiceTest {
+    @Mock
+    private UsersRepository usersRepository;
+
     @InjectMocks
     private DefaultUsersService subject;
 
@@ -22,7 +27,9 @@ public class DefaultUsersServiceTest {
     @Test
     public void getUsers_returnsAUser() {
         User user = new User();
-        user.setName("Jared");
+        user.setName("Blah");
+
+        when(usersRepository.findAll()).thenReturn(Collections.singletonList(user));
 
         List<User> users = subject.getUsers();
 
