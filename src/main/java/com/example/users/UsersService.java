@@ -1,4 +1,4 @@
-package com.example;
+package com.example.users;
 
 import java.util.List;
 

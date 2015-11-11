@@ -1,6 +1,8 @@
-package com.example;
+package com.example.users;
 
-import com.jayway.jsonassert.impl.matcher.IsCollectionWithSize;
+import com.example.Application;
+import com.example.users.User;
+import com.example.users.UsersRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,5 @@ public class UsersApiTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.users", hasSize(1)))
                 .andExpect(jsonPath("$.users[0].name", is("Hi ")));
-
     }
 }

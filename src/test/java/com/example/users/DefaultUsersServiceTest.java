@@ -1,5 +1,8 @@
-package com.example;
+package com.example.users;
 
+import com.example.users.DefaultUsersService;
+import com.example.users.User;
+import com.example.users.UsersRepository;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
