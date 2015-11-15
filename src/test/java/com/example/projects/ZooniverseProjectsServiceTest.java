@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.client.MockRestServiceServer.createServer;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -134,5 +135,10 @@ public class ZooniverseProjectsServiceTest {
         List<Project> projects = subject.getProjects();
 
         assertThat(projects, hasSize(1));
+
+        Project project = projects.get(0);
+        assertThat(project.getDisplayName(), is("oldweather"));
+        assertThat(project.getDescription(), is("Old Weather aims to recover worldwide weather observations to help improve climate model predictions."));
+        assertThat(project.getClassificationsCount(), is(390));
     }
 }
