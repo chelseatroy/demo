@@ -1,6 +1,9 @@
 package com.example.projects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,10 +15,17 @@ public class ZooniverseProjectsService implements ProjectsService {
     private RestTemplate restTemplate;
 
     public List<Project> getProjects() {
-        ProjectsResponse response = restTemplate.getForObject(
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Accept", "application/vnd.api+json; version=1");
+
+        HttpEntity<?> httpEntity = new HttpEntity<>(requestHeaders);
+
+        HttpEntity<ProjectsResponse> response = restTemplate.exchange(
                 "https://panoptes-staging.zooniverse.org/api/projects",
+                HttpMethod.GET,
+                httpEntity,
                 ProjectsResponse.class);
-        return response.getProjects();
+        return response.getBody().getProjects();
     }
 
     public static class ProjectsResponse {

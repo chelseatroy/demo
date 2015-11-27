@@ -18,8 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.client.MockRestServiceServer.createServer;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,6 +41,7 @@ public class ZooniverseProjectsServiceTest {
     public void getProjects_makesApiCall() {
         mockZooniverseServer.expect(method(HttpMethod.GET))
                 .andExpect(requestTo("https://panoptes-staging.zooniverse.org/api/projects"))
+                .andExpect(header("Accept", "application/vnd.api+json; version=1"))
                 .andRespond(withSuccess("{\n" +
                         "  \"projects\": [\n" +
                         "    {\n" +
