@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ZooniverseProjectsService implements ProjectsService {
@@ -25,7 +26,19 @@ public class ZooniverseProjectsService implements ProjectsService {
                 HttpMethod.GET,
                 httpEntity,
                 ProjectsResponse.class);
-        return response.getBody().getProjects();
+        List<Project> projects = response.getBody().getProjects();
+
+        projects.stream()
+                .filter(project -> project.getSlug() != null)
+                .map(project -> translateProject(project))
+                .collect(Collectors.toList());
+
+        return projects;
+    }
+
+    private Project translateProject(Project project) {
+        project.setWebViewUrl("https://www.zooniverse.org/projects/" + project.getSlug());
+        return project;
     }
 
     public static class ProjectsResponse {

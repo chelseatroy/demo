@@ -11,6 +11,10 @@ public class Project {
     @JsonProperty(value = "classifications_count")
     private Integer classificationsCount;
 
+
+    private String slug;
+    private String webViewUrl;
+
     public String getDescription() {
         return description;
     }
@@ -33,5 +37,21 @@ public class Project {
 
     public void setClassificationsCount(Integer classificationsCount) {
         this.classificationsCount = classificationsCount;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public void setWebViewUrl(String webViewUrl) {
+        this.webViewUrl = webViewUrl;
+    }
+
+    public String getWebViewUrl() {
+        return webViewUrl;
     }
 }

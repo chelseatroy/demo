@@ -73,7 +73,9 @@ public class ZooniverseProjectsServiceTest {
                         "      \"href\": \"/projects/195\",\n" +
                         "      \"workflow_description\": \"\",\n" +
                         "      \"primary_language\": \"en\",\n" +
-                        "      \"tags\": [],\n" +
+                        "      \"tags\": [" +
+                        "        \"astronomy\"\n" +
+                                "      ],\n" +
                         "      \"experimental_tools\": [],\n" +
                         "      \"links\": {\n" +
                         "        \"workflows\": [\n" +
@@ -140,5 +142,10 @@ public class ZooniverseProjectsServiceTest {
         assertThat(project.getDisplayName(), is("oldweather"));
         assertThat(project.getDescription(), is("Old Weather aims to recover worldwide weather observations to help improve climate model predictions."));
         assertThat(project.getClassificationsCount(), is(390));
+
+//        assertThat(project.getTags().size(), is(1));
+//        assertThat(project.getTags().get(0), is("astronomy"));
+        assertThat(project.getWebViewUrl(), is("https://www.zooniverse.org/projects/perryroper/oldweather"));
+
     }
 }
