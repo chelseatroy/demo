@@ -1,6 +1,9 @@
 package com.example.projects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class Project {
     private String description;
@@ -11,6 +14,8 @@ public class Project {
     @JsonProperty(value = "classifications_count")
     private Integer classificationsCount;
 
+    @JsonProperty(value = "tags")
+    List<Category> categories;
 
     private String slug;
     private String webViewUrl;
@@ -51,7 +56,32 @@ public class Project {
         this.webViewUrl = webViewUrl;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
     public String getWebViewUrl() {
         return webViewUrl;
+    }
+
+    static class Category {
+        private String category;
+
+        @JsonCreator
+        public Category(String category) {
+            this.category = category;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
     }
 }
