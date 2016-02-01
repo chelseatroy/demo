@@ -19,6 +19,7 @@ public class Project {
 
     private String slug;
     private String webViewUrl;
+    private String redirect;
 
     public String getDescription() {
         return description;
@@ -66,6 +67,14 @@ public class Project {
 
     public String getWebViewUrl() {
         return webViewUrl;
+    }
+
+    public void setRedirect(String redirect) {
+        this.redirect = redirect;
+    }
+
+    public String getRedirect() {
+        return redirect;
     }
 
     static class Category {

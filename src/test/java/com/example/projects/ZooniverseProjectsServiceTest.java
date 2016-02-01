@@ -38,7 +38,7 @@ public class ZooniverseProjectsServiceTest {
     }
 
     @Test
-    public void getProjects_makesApiCall() {
+    public void getProjects_makesApiCall_andDeserializesResponse() {
         mockZooniverseServer.expect(method(HttpMethod.GET))
                 .andExpect(requestTo("https://panoptes-staging.zooniverse.org/api/projects"))
                 .andExpect(header("Accept", "application/vnd.api+json; version=1"))
@@ -145,6 +145,20 @@ public class ZooniverseProjectsServiceTest {
         assertThat(project.getCategories().size(), is(1));
         assertThat(project.getCategories().get(0).getCategory(), is("astronomy"));
         assertThat(project.getWebViewUrl(), is("https://www.zooniverse.org/projects/perryroper/oldweather"));
+    }
 
+    @Test
+    public void translateProjects_setsWebViewUrl() {
+        Project projectWithSlug = new Project();
+        projectWithSlug.setSlug("mysciencelab/awesomeproject");
+
+        Project projectWithSpecialUrl = new Project();
+        projectWithSpecialUrl.setRedirect("awesomeproject.org");
+
+        projectWithSlug = subject.translateProject(projectWithSlug);
+        projectWithSpecialUrl = subject.translateProject(projectWithSpecialUrl);
+
+        assertThat(projectWithSlug.getWebViewUrl(), is("https://www.zooniverse.org/projects/mysciencelab/awesomeproject"));
+        assertThat(projectWithSpecialUrl.getWebViewUrl(), is("awesomeproject.org"));
     }
 }

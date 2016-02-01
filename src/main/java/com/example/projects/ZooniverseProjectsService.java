@@ -36,8 +36,10 @@ public class ZooniverseProjectsService implements ProjectsService {
         return projects;
     }
 
-    private Project translateProject(Project project) {
-        project.setWebViewUrl("https://www.zooniverse.org/projects/" + project.getSlug());
+    public Project translateProject(Project project) {
+        String webViewUrl = project.getRedirect() != null && !project.getRedirect().isEmpty() ? project.getRedirect() : "https://www.zooniverse.org/projects/" + project.getSlug();
+
+        project.setWebViewUrl(webViewUrl);
         return project;
     }
 
